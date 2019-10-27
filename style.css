@@ -22,7 +22,7 @@
 * {
     margin: 0;
     padding: 0;
-    /* font-family: 'Press Start 2P', cursive; */
+    font-family: 'Press Start 2P', cursive;
 }
 
 body {
@@ -36,22 +36,78 @@ body {
     align-items: center;
     flex-direction: column;
 }
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container {
     border: 0.2rem double var(--primary);
     height: 30rem;
     width: 30rem;
 }
+
 input[type="text"]{
     color:var(--primary);
     background: var(--secondary);
     border: none;
     font-size: 1.2rem;
 }
-.function {
+.input {
     display:flex;
+    margin: 1rem;
 }
-.function p {
+.input p {
     font-size: 1.2rem;
     padding: 0 0.5rem;
     
+}
+
+h2 {
+    margin-bottom: 2rem;
+}
+.inventory {
+    border: 1px solid red;
+    height: 100%;
+    width: 20rem;
+    margin-left: 1rem;
+    text-align: center;
+}
+.inventory ul {
+    /* border: 1px solid red; */
+    text-align: left;
+    list-style: none;
+    margin: 1rem 0 0 1rem;
+}
+.inventory ul li::before {
+    content:"_";
+}
+.mapHolder {
+    border: 1px solid red;
+    height: 100%;
+    width: 20rem;
+    text-align: center;
+    margin-right: 1rem;
+}
+.map {
+    /* border: 1px solid red; */
+    
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.map div {
+    /* border: 1px solid red; */
+    margin: 0.5rem;
+    
+    width: 5rem;
+    height: 5rem;
+}
+.active {
+    border: 0.1rem dashed var(--primary);
+}
+.location {
+    background: var(--primary);
 }
