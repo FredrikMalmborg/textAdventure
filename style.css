@@ -1,0 +1,57 @@
+/*
+    font-family: 'Staatliches', cursive;
+
+    font-family: 'Abril Fatface', cursive;
+
+    font-family: 'Righteous', cursive;
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-family: 'Turret Road', cursive;
+
+    font-family: 'Press Start 2P', cursive;
+
+    font-family: 'Black Ops One', cursive;
+
+*/
+:root {
+    --primary: #e5ffff;
+    --secondary: #333319;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    /* font-family: 'Press Start 2P', cursive; */
+}
+
+body {
+    width:100vw;
+    height:100vh;
+    background: var(--secondary);
+    color: var(--primary);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.container {
+    border: 0.2rem double var(--primary);
+    height: 30rem;
+    width: 30rem;
+}
+input[type="text"]{
+    color:var(--primary);
+    background: var(--secondary);
+    border: none;
+    font-size: 1.2rem;
+}
+.function {
+    display:flex;
+}
+.function p {
+    font-size: 1.2rem;
+    padding: 0 0.5rem;
+    
+}
