@@ -1,25 +1,24 @@
+
 let input = document.querySelector("input"),
     display = document.querySelector(".terminal"),
     lastInput = document.querySelector(".terminal p:last-child"),
     secondToLastInput = document.querySelector(".terminal p:nth-last-child(2)"),
-    inventory = ["bread", "paste", "a jar of dirt", "pen"]
-
-// var object = {
-//     name: "pen",
-//     count: 1,
-//     inInventory: false
-// }
-
-
+    inventory = ["bread", "paste", "a jar of dirt", "pen"],
+    CurrentLocation = {
+    room: "bottom",
+    doors: 1,
+    interactions: ["door", "corder", "plant"]
+}
 
 
 document.addEventListener('keypress', logKey);
 
 function logKey(e) {
-    if (` ${e.code}` === " Enter" && input.value !== "") {
+    if (` ${e.code}` === " Enter" && input.value !== "") {//add what location different commands work
         writeToTerminal(input.value)
 
         input.placeholder = "do something"
+        
 
         if (input.value === "use") {
             input.placeholder = "Use what item?"
@@ -46,7 +45,10 @@ function isInInventory(item) {
         console.log(item + " not found.")
     }
 }
-
+/**
+ * 
+ * @param {string} x 
+ */
 function writeToTerminal(x) {
     let listNode = document.createElement('p'),
         textNode = document.createTextNode(x)
@@ -58,8 +60,6 @@ function writeToTerminal(x) {
     if (secondToLastInput === "use") {
         console.log("use me daddy")
     }
-
-    console.log(listNode)
 }
 
 function log() {
