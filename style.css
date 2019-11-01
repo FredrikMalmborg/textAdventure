@@ -103,6 +103,7 @@ h2 {
     border-bottom: 1px solid var(--primary);
     padding: 0.2rem;
     margin-right: 1rem;
+    transition: .1s ease;
 }
 .terminal p:last-child {
     margin-bottom: 2rem;
