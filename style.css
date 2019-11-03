@@ -140,6 +140,7 @@ h2 {
 
     width: 100%;
     opacity: 0;
+    transition: 1s ease;
 }
 .map img:nth-child(5){
     opacity: 1;
