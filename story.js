@@ -10,24 +10,34 @@ function whatDoesThisDo() {
       document.querySelector(".winState").style.display = "flex";
     }, 2000);
   } // deathstate
-  else if (plantAngerLevel > 0) {
-    states.dead = true;
-    writeToTerminal("The plant is annoyed and eats you whole...");
-    whatDoesThisDo();
-  } // you have angered the plant, and it kills you
+  
   else if (
     latestElement.innerHTML === "you gave " + activeObject + " to plant" &&
     latestElement.innerHTML !== "you gave pen to plant"
   ) {
     plantAngerLevel++;
+    knowlage.knowPlant = true;
     writeToTerminal(
       "'Ey kiddo, wattchu doin', i don't want nona that garbage' said the pland in a raspy voice. 'Got a smoke tho?'"
     );
+    log();
+    if (plantAngerLevel > 1) {
+      states.dead = true;
+      writeToTerminal("The plant is annoyed and eats you whole...");
+      whatDoesThisDo();
+    } // you have angered the plant, and it kills you
   } // anything but pen to plant
   else if (latestElement.innerHTML === "you kicked the plant") {
     console.log(plantAngerLevel);
     plantAngerLevel++;
+    knowlage.knowPlant = true;
     writeToTerminal("'Eeyeyehy, wattchu up to you lil shit!! STOP IT!'");
+    log();
+    if (plantAngerLevel > 1) {
+      states.dead = true;
+      writeToTerminal("The plant is annoyed and eats you whole...");
+      whatDoesThisDo();
+    } // you have angered the plant, and it kills you
   } // anything but pen to plant
   else if (latestElement.innerHTML === "you gave pen to plant") {
     writeToTerminal(
@@ -38,11 +48,13 @@ function whatDoesThisDo() {
     pushToInventory("life essence");
   } //pen to plant
   else if (latestElement.innerHTML === "you tried opening the cupboard") {
+    knowlage.knowSkeleton = true
     writeToTerminal(
       "the cupboard opens with ease. in the back of the cupboard there is a large hole. and sitting on the " +
         "other side of the hole beteeen the cupboard and the wall is most likely the source of the bloody mess. a skeleton"
     );
     pushToInteractable("skeleton");
+    log();
   } //open cupboard
   else if (latestElement.innerHTML === "you kicked the planks") {
     writeToTerminal(
@@ -65,10 +77,10 @@ function whatDoesThisDo() {
       "The skeleton rattles a bit, then stands up, stretching his bones and yawnes. 'ooooo exellent my good sire, " +
         "i have missed this putrid air in my non-existent lungs for a good while now. I do appreciate this most glorious act of kindness " +
         "but why have you not yet left throught that door? It looks brittle to me, or if you have any pointy objects i could try picking the lock for you.'"
-        );
-        itentifyAndSpliceFromInventory("life essence")
+    );
+    itentifyAndSpliceFromInventory("life essence");
   } else if (latestElement.innerHTML === "you gave rusty nail to skeleton") {
-      itentifyAndSpliceFromInventory("rusty nail")
+    itentifyAndSpliceFromInventory("rusty nail");
     writeToTerminal(
       "'Exellent laddie, let's get out of here!'" +
         "Stan the skeleton takes the rusty nail from your hand and with sniperelite precision he picks the lock and the door opens"
@@ -81,7 +93,7 @@ function whatDoesThisDo() {
       "The door was obviously made from really bad material so the kick broke down the door on the first try. " +
         " YOU WON THE GAME "
     );
-    if (states.knowStan) {
+    if (knowlage.knowStan) {
       writeToTerminal("Too bad stan has to stay behind...");
     }
 
@@ -92,7 +104,7 @@ function whatDoesThisDo() {
       "Upon a closer look at the skeleton you can see that he has a nametag on, it says STAN"
     );
     pushToInteractable("stan");
-    states.knowStan = true;
+    knowlage.knowStan = true;
   } else {
     writeToTerminal("That didn't seem to do anything...");
   }

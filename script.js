@@ -21,16 +21,22 @@ let latestElement,
   },
   states = {
     start: true,
-    knowStan: false,
     rustyNailExists: false,
     dead: false,
     win: false
+  },
+  knowlage = {
+    knowStan: false,
+    knowSkeleton: false,
+    knowPlant: false,
+    knowRoom: false
   };
-
 
 /**
  * actions
- * @typedef {{use: Boolean, useOn: Boolean, give: Boolean, giveTo: Boolean, kick: Boolean, open: Boolean, take: Boolean, search: Boolean}} Actions
+ * @typedef {{use: Boolean, useOn: Boolean, give: Boolean, giveTo: Boolean, kick: Boolean, open: Boolean, take: Boolean, search: Boolean}} actions
+ * @typedef {{start: Boolean,rustyNailExists: Boolean, dead: Boolean, win: Boolean}} states
+ * @typedef {{knowStan: Boolean, knowSkeleton: Boolean, knowPlant: Boolean, knowRoom: Boolean}} knowlage
  */
 
 document.addEventListener("keypress", logKey);
@@ -38,13 +44,25 @@ document.addEventListener("keypress", logKey);
 function logKey(event) {
   if (event.keyCode === 13 && input.value !== "") {
     const userAction = input.value.toLowerCase().trim();
+
+    input.placeholder = "Do what?";
     console.log(userAction);
-    game(event);
+    game();
+  } else if (event.keyCode === 27) {
+    console.log("nut");
+    (actions.use = false),
+      (actions.useOn = false),
+      (actions.give = false),
+      (actions.giveTo = false),
+      (actions.kick = false),
+      (actions.open = false),
+      (actions.take = false),
+      (actions.search = false);
+    input.value = "";
+    input.placeholder = "Do what?";
   }
 }
-function game(event) {
-  input.placeholder = "Do what?";
-
+function game() {
   // Prepare action
   switch (input.value) {
     case "kms":
@@ -212,7 +230,22 @@ document.querySelector(".help").onclick = function() {
 
 //TEST CHAMBER
 function log() {
-  //   resetTerminal();
-  console.log(latestElement);
-  console.log(document.querySelector(".terminal p:last-child"));
+  let roomArray = document.querySelectorAll(".map img");
+  if (knowlage.knowRoom) {
+    roomArray[3].style.opacity = "1";
+  }
+  if (knowlage.knowRoom && knowlage.knowPlant) {
+    roomArray[1].style.opacity = "1";
+    roomArray[3].style.opacity = "0";
+  }
+  if (knowlage.knowRoom && knowlage.knowSkeleton) {
+    roomArray[2].style.opacity = "1";
+    roomArray[3].style.opacity = "0";
+  }
+  if (knowlage.knowPlant && knowlage.knowSkeleton) {
+    roomArray[0].style.opacity = "1";
+    roomArray[1].style.opacity = "0";
+    roomArray[2].style.opacity = "0";
+    roomArray[3].style.opacity = "0";
+  }
 }
