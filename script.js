@@ -126,6 +126,11 @@ function game() {
 }
 
 // ROOM MANAGEMENT
+/**
+ * Check if chosen string exists within the inventory array
+ * @param {String} item
+ * @returns the interactable
+ */
 function isInteractable(item) {
   let isInteractable = false;
 
@@ -139,9 +144,18 @@ function isInteractable(item) {
     writeToTerminal(item + " not found");
   }
 }
+/**
+ * send item to the interactable array
+ * @param {String} item
+ */
 function pushToInteractable(item) {
   interactable.push(item);
 }
+/**
+ * Find out what the index of chosen string is within the interactable list, and splice from list.
+ * Otherwise do nothing
+ * @param {String} item
+ */
 function itentifyAndSpliceFromInteractable(item) {
   let indexOfItem = interactable.indexOf(item);
   if (indexOfItem > -1) {
@@ -154,7 +168,7 @@ function itentifyAndSpliceFromInteractable(item) {
 /**
  * Check if chosen string exists within the inventory array
  * @param {String} item
- * @returns
+ * @returns the identified item
  */
 function isInInventory(item) {
   for (let i = 0; i < inventory.length; i++) {
@@ -226,19 +240,6 @@ function scrollToBottom() {
   var element = document.querySelector(".container");
   element.scrollTop = element.scrollHeight;
 }
-
-// HELP
-let helpClick = false;
-document.querySelector(".help").onclick = function() {
-  if (helpClick === false) {
-    document.querySelector(".help p").style.display = "block";
-    helpClick = true;
-  } else if (helpClick === true) {
-    document.querySelector(".help p").style.display = "none";
-    helpClick = false;
-  }
-};
-
 //MAP
 /**
  * Updates the map when new informaton is revealed.
@@ -263,3 +264,16 @@ function map() {
     roomArray[3].style.opacity = "0";
   }
 }
+
+// HELP
+let helpClick = false;
+document.querySelector(".help").onclick = function() {
+  if (helpClick === false) {
+    document.querySelector(".help p").style.display = "block";
+    helpClick = true;
+  } else if (helpClick === true) {
+    document.querySelector(".help p").style.display = "none";
+    helpClick = false;
+  }
+};
+

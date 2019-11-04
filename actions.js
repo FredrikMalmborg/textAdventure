@@ -1,30 +1,50 @@
+/**
+ * initiate the use action
+ */
 function prepareForSearch() {
   actions.search = true;
   input.placeholder = "Search what?";
 }
+/**
+ * initiate the open action
+ */
 function prepareForOpen() {
   actions.open = true;
   input.placeholder = "Open what?";
 }
+/**
+ * initiate the kick action
+ */
 function prepareForKick() {
   actions.kick = true;
   input.placeholder = "Kick what?";
 }
+/**
+ * initiate the take action
+ */
 function prepareForTake() {
   actions.take = true;
   input.placeholder = "Take what?";
 }
+/**
+ * initiate the use action
+ */
 function prepareForUse() {
   actions.use = true;
   input.placeholder = "Use what item?";
 }
+/**
+ * initiate the give action
+ */
 function prepareForGive() {
   actions.give = true;
   input.placeholder = "Give what item?";
 }
 
 //--------------------------------------//
-
+/**
+ * 
+ */
 function search() {
   if (input.value === "room") {
     // search an interactable
