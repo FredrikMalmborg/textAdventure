@@ -45,7 +45,6 @@ function whatDoesThisDo() {
     );
     itentifyAndSpliceFromInventory(activeObject);
     itentifyAndSpliceFromInteractable("plant");
-    console.log(interactable);
     pushToInventory("life essence");
   } else if (latestElement.innerHTML === "you tried opening the cupboard") {
     knowlage.knowSkeleton = true;
