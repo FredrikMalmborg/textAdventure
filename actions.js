@@ -43,7 +43,8 @@ function prepareForGive() {
 
 //--------------------------------------//
 /**
- * 
+ * Checks if the search action is initiated and if it is check if the input does match an element in the interactable array.
+ * Output any valid results in the terminal.
  */
 function search() {
   if (input.value === "room") {
@@ -67,6 +68,10 @@ function search() {
     actions.search = false;
   }
 }
+/**
+ * Checks if the open action is initiated and if it is check if the input does match an element in the interactable array.
+ * Output any valid results in the terminal.
+ */
 function open() {
   if (actions.open && input.value === isInteractable(input.value)) {
     // open an interactable
@@ -80,6 +85,10 @@ function open() {
     writeToTerminal("you can't open that.");
   }
 }
+/**
+ * Checks if the kick action is initiated and if it is check if the input does match an element in the interactable array.
+ * Output any valid results in the terminal.
+ */
 function kick() {
   if (actions.kick && input.value === isInteractable(input.value)) {
     // kick an interactable
@@ -95,6 +104,10 @@ function kick() {
     whatDoesThisDo();
   }
 }
+/**
+ * Checks if the take action is initiated and if it is check if the input does match an element in the interactable array.
+ * Output any valid results in the terminal.
+ */
 function take() {
   if (actions.take && input.value === isInteractable(input.value)) {
     // take an item
@@ -110,6 +123,11 @@ function take() {
     whatDoesThisDo();
   }
 }
+/**
+ * Checks if the use action is initiated and if it is check if the input does match an element in the inventory array.
+ * Then checks if the useOn action is initiated and if it is check if the input does match an element in the interactable array.
+ * Output any valid results in the terminal.
+ */
 function use() {
   if (input.value === isInInventory(input.value)) {
     activeObject = input.value;
@@ -134,6 +152,11 @@ function use() {
     actions.useOn = false;
   }
 }
+/**
+ * Checks if the give action is initiated and if it is check if the input does match an element in the inventory array.
+ * Then checks if the giveTo action is initiated and if it is check if the input does match an element in the interactable array.
+ * Output any valid results in the terminal.
+ */
 function give() {
   if (input.value === isInInventory(input.value)) {
     // give an item

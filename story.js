@@ -1,7 +1,6 @@
 // STORY MANAGEMENT
 /**
- * checks if winconditions of
- * @param{}
+ * checks if winconditions are met, if lossconditions are met, if the terminal output matches any of the if-statements that progress the game.
  */
 function whatDoesThisDo() {
   if (states.dead) {
