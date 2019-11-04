@@ -35,7 +35,7 @@ function search() {
     actions.search = false;
     writeToTerminal("What do you do?");
     itentifyAndSpliceFromInteractable("room");
-    log();
+    map();
   }
   if (actions.search && input.value === isInteractable(input.value)) {
     writeToTerminal("You searched the " + input.value);
@@ -50,7 +50,6 @@ function search() {
 function open() {
   if (actions.open && input.value === isInteractable(input.value)) {
     // open an interactable
-    console.log("open a thing - check");
     actions.open = false;
 
     writeToTerminal("you tried opening the " + input.value);
@@ -64,14 +63,12 @@ function open() {
 function kick() {
   if (actions.kick && input.value === isInteractable(input.value)) {
     // kick an interactable
-    console.log("kick a thing - check");
     actions.kick = false;
 
     writeToTerminal("you kicked the " + input.value);
     whatDoesThisDo();
   } else if (actions.kick && input.value !== isInteractable(input.value)) {
     // kick an interactable FAILS
-    console.log("kick a thing - check");
     actions.kick = false;
 
     writeToTerminal("you kicked the " + input.value);
@@ -81,14 +78,12 @@ function kick() {
 function take() {
   if (actions.take && input.value === isInteractable(input.value)) {
     // take an item
-    console.log("take a thing - check");
     actions.take = false;
 
     writeToTerminal("you try taking " + input.value);
     whatDoesThisDo();
   } else if (actions.take && input.value !== isInInventory(input.value)) {
     // take an item FAILS
-    console.log("take FAIL - check");
     actions.take = false;
 
     writeToTerminal("you can't take that.");
@@ -97,7 +92,6 @@ function take() {
 }
 function use() {
   if (input.value === isInInventory(input.value)) {
-    console.log("using an item - check");
     activeObject = input.value;
     actions.useOn = true;
     actions.use = false;
@@ -107,7 +101,6 @@ function use() {
 
     return activeObject;
   } else if (actions.useOn && input.value === isInteractable(input.value)) {
-    console.log("using an item on a thing - check");
 
     writeToTerminal("You used " + activeObject + " on " + input.value);
     whatDoesThisDo();
@@ -125,7 +118,6 @@ function use() {
 function give() {
   if (input.value === isInInventory(input.value)) {
     // give an item
-    console.log("giving an item - check");
 
     activeObject = input.value;
     actions.giveTo = true;
@@ -137,7 +129,6 @@ function give() {
     return activeObject;
   } else if (actions.giveTo && input.value === isInteractable(input.value)) {
     // give an item to what or whom'st'd've?
-    console.log("giving an item to a thing - check");
 
     writeToTerminal("you gave " + activeObject + " to " + input.value);
     whatDoesThisDo();

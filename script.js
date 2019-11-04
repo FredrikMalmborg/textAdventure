@@ -46,10 +46,8 @@ function logKey(event) {
     const userAction = input.value.toLowerCase().trim();
 
     input.placeholder = "Do what?";
-    console.log(userAction);
     game();
   } else if (event.keyCode === 27) {
-    console.log("nut");
     (actions.use = false),
       (actions.useOn = false),
       (actions.give = false),
@@ -135,13 +133,11 @@ function isInteractable(item) {
     }
   }
   if (isInteractable === false) {
-    console.log(item + " not found.");
+    writeToTerminal(item + " not found");
   }
 }
 function pushToInteractable(item) {
-  console.log(currentLocation.interactable);
   currentLocation.interactable.push(item);
-  console.log(currentLocation.interactable);
 }
 function itentifyAndSpliceFromInteractable(item) {
   let indexOfItem = currentLocation.interactable.indexOf(item);
@@ -216,6 +212,7 @@ function scrollToBottom() {
   var element = document.querySelector(".container");
   element.scrollTop = element.scrollHeight;
 }
+
 // HELP
 let clicked = false;
 document.querySelector(".help").onclick = function() {
@@ -229,7 +226,7 @@ document.querySelector(".help").onclick = function() {
 };
 
 //TEST CHAMBER
-function log() {
+function map() {
   let roomArray = document.querySelectorAll(".map img");
   if (knowlage.knowRoom) {
     roomArray[3].style.opacity = "1";
