@@ -3,6 +3,9 @@
   --secondary: #333319;
 }
 
+html {
+  font-size: 80%;
+}
 .main {
   margin: 2rem;
 }
