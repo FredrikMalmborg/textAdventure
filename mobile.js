@@ -1,13 +1,17 @@
-//MOBILE INVENTORY
+//MOBILE
+
 let invClick = false;
-document.querySelector(".inventory").onclick = function() {
+let test = document.querySelector("body").style.width;
+
+document.querySelector(".inventory h2").onclick = function() {
   if (invClick === false) {
-    console.log("show");
-    document.querySelector(".inventory").classList.add("invMob");
+      console.log("show inv");
+      console.log(test);
+      document.querySelector(".inventory ul").classList.add("mobInv");
     invClick = true;
   } else if (invClick === true) {
-    console.log("hide");
-    document.querySelector(".inventory").classList.remove("invMob");
+    console.log("hide inv");
+    document.querySelector(".inventory ul").classList.remove("mobInv");
     invClick = false;
   }
 };
