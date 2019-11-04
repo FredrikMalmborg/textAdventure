@@ -41,9 +41,8 @@ document.addEventListener("keypress", logKey);
  * @param {Number} event
  */
 function logKey(event) {
-  if (event.keyCode === 13 && input.value !== "") {
+  if ((event.keyCode === 13 || event.key === "Enter") && input.value !== "") {
     const userAction = input.value.toLowerCase().trim();
-
     input.placeholder = "Do what?";
     game();
   } else if (event.keyCode === 27) {
