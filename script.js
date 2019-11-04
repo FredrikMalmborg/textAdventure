@@ -61,7 +61,7 @@ function logKey(event) {
 }
 /**
  * Based on what command you write it will impact the gameboard and open up new possibilitys of interaction and itemuse.
- * @param {String} 
+ * @param {String}
  */
 function game() {
   // Prepare action
@@ -150,6 +150,12 @@ function itentifyAndSpliceFromInteractable(item) {
 }
 
 // INVENTORY MANAGEMENT
+
+/**
+ * Check if chosen string exists within the inventory array
+ * @param {String} item
+ * @returns
+ */
 function isInInventory(item) {
   for (let i = 0; i < inventory.length; i++) {
     if (inventory[i] === item) {
@@ -158,6 +164,12 @@ function isInInventory(item) {
     }
   }
 }
+/**
+ * Find out what the index of chosen string is within the inventory list, and splice from list.
+ * And with the refreshInventory() function it displays the new inventory.
+ * Otherwise do nothing
+ * @param {String} item
+ */
 function itentifyAndSpliceFromInventory(item) {
   let indexOfItem = inventory.indexOf(item);
   if (indexOfItem > -1) {
@@ -165,18 +177,25 @@ function itentifyAndSpliceFromInventory(item) {
   }
   refreshInventory();
 }
+
+/**
+ * send item to the Inventory array and with the refreshInventory() function it displays the new inventory.
+ * @param {String} item
+ */
 function pushToInventory(item) {
   inventory.push(item);
   refreshInventory();
 }
+
+/**
+ * looks through the inventory array, saves all elements to a let. Then remove all of the array items and rebuild the new inventory with any changes made.
+ */
 function refreshInventory() {
   let inventoryList = document.querySelectorAll(".inventory ul li");
 
-  // removes all listitems inb4 we rebuild the "new" list later
   for (let i = 0; (targetedItem = inventoryList[i]); i++) {
     targetedItem.parentNode.removeChild(targetedItem);
   }
-  // this is where we rebuild the "new" list
   inventory.forEach(item => {
     let listNode = document.createElement("li"),
       textNode = document.createTextNode(item);
@@ -188,7 +207,7 @@ refreshInventory();
 
 // TERMINAL FUNCTIONALITY
 /**
- * creates element and adds to .terminal class
+ * Creates <p> and adds to .terminal class with the string as content
  * @param {String} string
  */
 function writeToTerminal(string) {
@@ -199,36 +218,31 @@ function writeToTerminal(string) {
   document.querySelector(".terminal").appendChild(latestElement);
   scrollToBottom();
 }
-function resetTerminal() {
-  let terminalContent = document.querySelectorAll(".terminal p");
 
-  document.querySelector(".failState").style.display = "none";
-  states.start = true;
-
-  // removes all listitems inb4 we rebuild the "new" list later
-  for (let i = 0; (all = terminalContent[i]); i++) {
-    all.parentNode.removeChild(all);
-  }
-}
-
+/**
+ * Keep the scrollbar in the bottom of the window whenever new text is written out
+ */
 function scrollToBottom() {
   var element = document.querySelector(".container");
   element.scrollTop = element.scrollHeight;
 }
 
 // HELP
-let clicked = false;
+let helpClick = false;
 document.querySelector(".help").onclick = function() {
-  if (clicked === false) {
+  if (helpClick === false) {
     document.querySelector(".help p").style.display = "block";
-    clicked = true;
-  } else if (clicked === true) {
+    helpClick = true;
+  } else if (helpClick === true) {
     document.querySelector(".help p").style.display = "none";
-    clicked = false;
+    helpClick = false;
   }
 };
 
-//TEST CHAMBER
+//MAP
+/**
+ * Updates the map when new informaton is revealed.
+ */
 function map() {
   let roomArray = document.querySelectorAll(".map img");
   if (knowlage.knowRoom) {

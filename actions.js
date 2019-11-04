@@ -101,7 +101,6 @@ function use() {
 
     return activeObject;
   } else if (actions.useOn && input.value === isInteractable(input.value)) {
-
     writeToTerminal("You used " + activeObject + " on " + input.value);
     whatDoesThisDo();
 

@@ -1,5 +1,6 @@
 // STORY MANAGEMENT
 /**
+ * checks if winconditions of
  * @param{}
  */
 function whatDoesThisDo() {
@@ -44,6 +45,8 @@ function whatDoesThisDo() {
         "in a few moments the plant dies from lungcancer. in the last moments of the plants life it gave you it's 'life essence'"
     );
     itentifyAndSpliceFromInventory(activeObject);
+    itentifyAndSpliceFromInteractable("plant");
+    console.log(interactable);
     pushToInventory("life essence");
   } else if (latestElement.innerHTML === "you tried opening the cupboard") {
     knowlage.knowSkeleton = true;

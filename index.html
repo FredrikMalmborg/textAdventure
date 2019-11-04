@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css" media="screen and (max-width: 73rem)">
     <link
         href="https://fonts.googleapis.com/css?family=Abril+Fatface|Black+Ops+One|Orbitron|Press+Start+2P|Righteous|Staatliches|Turret+Road&display=swap"
         rel="stylesheet">
@@ -14,13 +15,19 @@
     <script defer src="script.js"></script>
     <script defer src="story.js"></script>
     <script defer src="actions.js"></script>
+    <script defer src="mobile.js"  media="screen and (max-width: 73rem)"></script>
+
     <title>Document</title>
 </head>
 
 <body>
+    <div class="tbag">
+        <h1>TBAG</h1>
+        <h6>text-based-adventure-game</h6>
+    </div>
     <div class="failState">
         <h1>YOU DIED</h1>
-        <p onClick="window.location.reload()">click to reset</p> 
+        <p onClick="window.location.reload()">click to reset</p>
     </div>
     <div class="winState">
         <h1>YOU WON</h1>
@@ -28,7 +35,7 @@
 
     <div class="main">
         <div class="mapHolder">
-            <h2>[ map ]</h2>
+            <h2>[&nbsp;map&nbsp;]</h2> 
             <div class="map">
                 <img src="./res/room 3.png" alt="room version 4">
                 <img src="./res/room 2.2.png" alt="room version 3">
@@ -43,7 +50,7 @@
             </div>
         </div>
         <div class="inventory">
-            <h2>[ inventory ]</h2>
+            <h2>[&nbsp;inventory&nbsp;]</h2>
 
             <ul>
             </ul>
@@ -64,7 +71,9 @@
             - kick<br>
             - open<br>
             - take<br>
-            - search
+            - search <br>
+            <br>
+            press 'escape' to abandon any action
         </p>
     </div>
 </body>

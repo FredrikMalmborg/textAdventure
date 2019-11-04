@@ -1,0 +1,64 @@
+:root {
+  --primary: #e5ffff;
+  --secondary: #333319;
+}
+
+.main {
+  margin: 2rem;
+}
+.tbag {
+  margin: 1rem;
+}
+
+.mapHolder {
+  position: relative;
+
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+.map {
+    display: none;
+}
+.map img{
+    width: 25rem;
+    transform: translateY(-50%) translateX(10%);
+    display: block;
+}
+.mapHolder h2 {
+  position: absolute;
+  transform: translateX(-60%) rotate(-90deg);
+}
+
+
+.inventory {
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+.inventory ul {
+  position: absolute;
+
+  /* left: -16rem; */
+  margin: 0;
+  padding: 1rem;
+
+  background: var(--primary);
+  color: var(--secondary);
+
+  display: none;
+  transform: translateY(-50%) translateX(-100%);
+}
+.inventory h2 {
+  position: absolute;
+
+  transform: translateX(-45%) rotate(90deg);
+}
+
+.mobInv {
+  display: block !important; /*FIRST TIME DONT SENT ME TO GOULAG*/
+  flex-direction: column;
+}
+.mobMap {
+  display: block ; /*FIRST TIME DONT SENT ME TO GOULAG*/
+}
