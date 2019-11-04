@@ -4,11 +4,7 @@ let latestElement,
   input = document.querySelector("input"),
   display = document.querySelector(".terminal"),
   inventory = ["bread", "a jar of dirt", "pen"],
-  currentLocation = {
-    room: "room",
-    doors: 1,
-    interactable: ["plant", "door", "planks", "cupboard", "blood", "room"]
-  },
+  interactable = ["plant", "door", "planks", "cupboard", "blood", "room"],
   actions = {
     use: false,
     useOn: false,
@@ -33,14 +29,17 @@ let latestElement,
   };
 
 /**
- * actions
  * @typedef {{use: Boolean, useOn: Boolean, give: Boolean, giveTo: Boolean, kick: Boolean, open: Boolean, take: Boolean, search: Boolean}} actions
  * @typedef {{start: Boolean,rustyNailExists: Boolean, dead: Boolean, win: Boolean}} states
  * @typedef {{knowStan: Boolean, knowSkeleton: Boolean, knowPlant: Boolean, knowRoom: Boolean}} knowlage
  */
 
 document.addEventListener("keypress", logKey);
-
+/**
+ * If Enter is pressed the program will take whatever is input into the inputfield and make the text into lowercase and trim it.
+ * If Escape is pressed the current action will be abandoned and the input.placeholder reset.
+ * @param {Number} event
+ */
 function logKey(event) {
   if (event.keyCode === 13 && input.value !== "") {
     const userAction = input.value.toLowerCase().trim();
@@ -60,6 +59,10 @@ function logKey(event) {
     input.placeholder = "Do what?";
   }
 }
+/**
+ * Based on what command you write it will impact the gameboard and open up new possibilitys of interaction and itemuse.
+ * @param {String} 
+ */
 function game() {
   // Prepare action
   switch (input.value) {
@@ -126,10 +129,10 @@ function game() {
 function isInteractable(item) {
   let isInteractable = false;
 
-  for (let i = 0; i < currentLocation.interactable.length; i++) {
-    if (currentLocation.interactable[i] === item) {
+  for (let i = 0; i < interactable.length; i++) {
+    if (interactable[i] === item) {
       isInteractable = true;
-      return currentLocation.interactable[i];
+      return interactable[i];
     }
   }
   if (isInteractable === false) {
@@ -137,12 +140,12 @@ function isInteractable(item) {
   }
 }
 function pushToInteractable(item) {
-  currentLocation.interactable.push(item);
+  interactable.push(item);
 }
 function itentifyAndSpliceFromInteractable(item) {
-  let indexOfItem = currentLocation.interactable.indexOf(item);
+  let indexOfItem = interactable.indexOf(item);
   if (indexOfItem > -1) {
-    currentLocation.interactable.splice(indexOfItem, 1);
+    interactable.splice(indexOfItem, 1);
   }
 }
 
