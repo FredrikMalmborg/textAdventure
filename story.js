@@ -60,9 +60,11 @@ function whatDoesThisDo() {
         " of planks it is not so good at aiming and misses all your vital parts and lands on the floor in front of you."
     );
     pushToInteractable("rusty nail");
+    pushToInteractable("nail");
     states.rustyNailExists = true;
   } else if (
-    latestElement.innerHTML === "you try taking rusty nail" &&
+    (latestElement.innerHTML === "you try taking rusty nail" ||
+      latestElement.innerHTML === "you try taking nail") &&
     states.rustyNailExists
   ) {
     writeToTerminal("You pick up the rusty nail");
