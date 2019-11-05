@@ -62,6 +62,7 @@ function whatDoesThisDo() {
     );
     pushToInteractable("rusty nail");
     pushToInteractable("nail");
+    itentifyAndSpliceFromInteractable("planks")
     states.rustyNailExists = true;
   } else if (
     (latestElement.innerHTML === "you try taking rusty nail" ||

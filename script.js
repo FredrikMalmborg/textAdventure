@@ -42,9 +42,9 @@ document.addEventListener("keypress", logKey);
  */
 function logKey(event) {
   if ((event.keyCode === 13 || event.key === "Enter") && input.value !== "") {
-    const userAction = input.value.toLowerCase().trim();
+    let userAction = input.value.toLowerCase().trim();
     input.placeholder = "Do what?";
-    game();
+    game(userAction);
   } else if (event.keyCode === 27) {
     (actions.use = false),
       (actions.useOn = false),
@@ -62,9 +62,9 @@ function logKey(event) {
  * Based on what command you write it will impact the gameboard and open up new possibilitys of interaction and itemuse.
  * @param {String}
  */
-function game() {
+function game(userInput) {
   // Prepare action
-  switch (input.value) {
+  switch (userInput) {
     case "kms":
     case "kill self":
     case "end life":
@@ -94,31 +94,31 @@ function game() {
 
     default:
       // Run action
-      if (input.value === "start" && states.start) {
+      if (userInput === "start" && states.start) {
         // start
-        writeToTerminal(input.value);
+        writeToTerminal(userInput);
         writeToTerminal(
           "You find yourself in an ragged dark and gloomy room. The only light seem to come from an old dusty light bulb slowly swaying in the middle of the room. searching the room might be a good idea?"
         );
         writeToTerminal("What do you do?");
         states.start = false;
-      } else if (input.value === "kms") {
+      } else if (userInput === "kms") {
         // kill your self
         writeToTerminal("You killed yourself");
         states.dead = true;
         whatDoesThisDo();
       } else if (actions.search) {
-        search();
+        search(userInput);
       } else if (actions.open) {
-        open();
+        open(userInput);
       } else if (actions.kick) {
-        kick();
+        kick(userInput);
       } else if (actions.take) {
-        take();
+        take(userInput);
       } else if (actions.use || actions.useOn) {
-        use();
+        use(userInput);
       } else if (actions.give || actions.giveTo) {
-        give();
+        give(userInput);
       }
   }
   input.value = "";
@@ -136,10 +136,12 @@ function isInteractable(item) {
   for (let i = 0; i < interactable.length; i++) {
     if (interactable[i] === item) {
       isInteractable = true;
+      console.log("interact fail")
       return interactable[i];
     }
   }
   if (isInteractable === false) {
+    console.log("interact fail")
     writeToTerminal(item + " not found");
   }
 }

@@ -46,11 +46,11 @@ function prepareForGive() {
  * Checks if the search action is initiated and if it is check if the input does match an element in the interactable array.
  * Output any valid results in the terminal.
  */
-function search() {
-  if (input.value === "room") {
+function search(userInput) {
+  if (userInput === "room") {
     // search an interactable
     writeToTerminal(
-      "With a sweeping look over the delapitated area you identify a few things..There is one door to the place, on the righthand side of the door there is a shady looking plant. Left of the door the roof seem to have fallen in and on the floor a bunch of odd moldy planks lie in a heap.behind you on the left quite close the the planks there is a big pool of coagulated stale blood.From the pool leading to inbehind a cupboard in the corner on the oposite side of the shady plantis a trail of the congealed old looking substance. the cupboard is closed but not sealed in any obvious way."
+      "With a sweeping look over the delapitated area you identify a few things..There is one door to the place, on the righthand side of the door there is a shady looking plant. Left of the door the roof seem to have fallen in and on the floor a bunch of odd moldy planks lie in a heap.behind you on the left quite close the the planks there is a big pool of coagulated stale blood.From the pool leading to inbehind a cupboard in the corner on the oposite side of the shady plant is a trail of the congealed old looking substance. the cupboard is closed but not sealed in any obvious way."
     );
     knowlage.knowRoom = true;
     actions.search = false;
@@ -58,11 +58,12 @@ function search() {
     itentifyAndSpliceFromInteractable("room");
     map();
   }
-  if (actions.search && input.value === isInteractable(input.value)) {
-    writeToTerminal("You searched the " + input.value);
+  if (actions.search && interactable.includes(userInput)) {
+    console.log("search success");
+    writeToTerminal("You searched the " + userInput);
     whatDoesThisDo();
     actions.search = false;
-  } else if (actions.search && input.value !== isInteractable(input.value)) {
+  } else if (actions.search && !interactable.includes(userInput)) {
     // search FAIL
     writeToTerminal("You can't search that?");
     actions.search = false;
@@ -72,14 +73,14 @@ function search() {
  * Checks if the open action is initiated and if it is check if the input does match an element in the interactable array.
  * Output any valid results in the terminal.
  */
-function open() {
-  if (actions.open && input.value === isInteractable(input.value)) {
+function open(userInput) {
+  if (actions.open && interactable.includes(userInput)) {
     // open an interactable
     actions.open = false;
 
-    writeToTerminal("you tried opening the " + input.value);
+    writeToTerminal("you tried opening the " + userInput);
     whatDoesThisDo();
-  } else if (actions.open && input.value !== isInteractable(input.value)) {
+  } else if (actions.open && !interactable.includes(userInput)) {
     // open an interactable FAILS
     actions.open = false;
     writeToTerminal("you can't open that.");
@@ -89,18 +90,18 @@ function open() {
  * Checks if the kick action is initiated and if it is check if the input does match an element in the interactable array.
  * Output any valid results in the terminal.
  */
-function kick() {
-  if (actions.kick && input.value === isInteractable(input.value)) {
+function kick(userInput) {
+  if (actions.kick && interactable.includes(userInput)) {
     // kick an interactable
     actions.kick = false;
 
-    writeToTerminal("you kicked the " + input.value);
+    writeToTerminal("you kicked the " + userInput);
     whatDoesThisDo();
-  } else if (actions.kick && input.value !== isInteractable(input.value)) {
+  } else if (actions.kick && !interactable.includes(userInput)) {
     // kick an interactable FAILS
     actions.kick = false;
 
-    writeToTerminal("you kicked the " + input.value);
+    writeToTerminal("you kicked the " + userInput);
     whatDoesThisDo();
   }
 }
@@ -108,14 +109,14 @@ function kick() {
  * Checks if the take action is initiated and if it is check if the input does match an element in the interactable array.
  * Output any valid results in the terminal.
  */
-function take() {
-  if (actions.take && input.value === isInteractable(input.value)) {
+function take(userInput) {
+  if (actions.take && interactable.includes(userInput)) {
     // take an item
     actions.take = false;
 
-    writeToTerminal("you try taking " + input.value);
+    writeToTerminal("you try taking " + userInput);
     whatDoesThisDo();
-  } else if (actions.take && input.value !== isInInventory(input.value)) {
+  } else if (actions.take && !interactable.includes(userInput)) {
     // take an item FAILS
     actions.take = false;
 
@@ -128,27 +129,27 @@ function take() {
  * Then checks if the useOn action is initiated and if it is check if the input does match an element in the interactable array.
  * Output any valid results in the terminal.
  */
-function use() {
-  if (input.value === isInInventory(input.value)) {
-    activeObject = input.value;
+function use(userInput) {
+  if (inventory.includes(userInput)) {
+    activeObject = userInput;
     actions.useOn = true;
     actions.use = false;
 
-    input.placeholder = "Use " + input.value + " on what?";
+    input.placeholder = "Use " + userInput + " on what?";
     input.value = "";
 
     return activeObject;
-  } else if (actions.useOn && input.value === isInteractable(input.value)) {
-    writeToTerminal("You used " + activeObject + " on " + input.value);
+  } else if (actions.useOn && interactable.includes(userInput)) {
+    writeToTerminal("You used " + activeObject + " on " + userInput);
     whatDoesThisDo();
 
     actions.useOn = false;
-  } else if (input.value !== isInInventory(input.value)) {
-    writeToTerminal(input.value + " is not an item");
+  } else if (!inventory.includes(userInput)) {
+    writeToTerminal(userInput + " is not an item");
     actions.use = false;
-  } else if (actions.useOn && input.value !== isInInventory(input.value)) {
-    writeToTerminal("can't use " + activeObject + " on " + input.value);
-    writeToTerminal(input.value + " is not a thing...");
+  } else if (actions.useOn && !interactable.includes(userInput)) {
+    writeToTerminal("can't use " + activeObject + " on " + userInput);
+    writeToTerminal(userInput + " is not a thing...");
     actions.useOn = false;
   }
 }
@@ -157,33 +158,33 @@ function use() {
  * Then checks if the giveTo action is initiated and if it is check if the input does match an element in the interactable array.
  * Output any valid results in the terminal.
  */
-function give() {
-  if (input.value === isInInventory(input.value)) {
+function give(userInput) {
+  if (inventory.includes(userInput)) {
     // give an item
 
-    activeObject = input.value;
+    activeObject = userInput;
     actions.giveTo = true;
     actions.give = false;
 
-    input.placeholder = "Give " + input.value + " to what or who?";
+    input.placeholder = "Give " + userInput + " to what or who?";
     input.value = "";
 
     return activeObject;
-  } else if (actions.giveTo && input.value === isInteractable(input.value)) {
+  } else if (actions.giveTo && interactable.includes(userInput)) {
     // give an item to what or whom'st'd've?
 
-    writeToTerminal("you gave " + activeObject + " to " + input.value);
+    writeToTerminal("you gave " + activeObject + " to " + userInput);
     whatDoesThisDo();
 
     actions.giveTo = false;
-  } else if (input.value !== isInInventory(input.value)) {
+  } else if (!interactable.includes(userInput)) {
     // if giving an item FAILS
-    writeToTerminal(input.value + " is not an item");
+    writeToTerminal(userInput + " is not an item");
     actions.give = false;
-  } else if (actions.giveTo && input.value !== isInteractable(input.value)) {
+  } else if (actions.giveTo && !interactable.includes(userInput)) {
     // if giving an item to something FAILS
-    writeToTerminal("can't give " + activeObject + " to " + input.value);
-    writeToTerminal(input.value + " is not a thing...");
+    writeToTerminal("can't give " + activeObject + " to " + userInput);
+    writeToTerminal(userInput + " is not a thing...");
     actions.giveTo = false;
   }
 }
